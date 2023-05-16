@@ -1,6 +1,9 @@
 # Memory Allocator Project
 
-Please look at these presentation slides before looking at the README.md file to better understand the implementation. Presentation Link: https://docs.google.com/presentation/d/1JwD6ZSrCvl3qAM70vlp1tFPzyfzNBees4rMeHBCoImU/edit?usp=sharing
+Kindly watch the recording of the presentation before looking at the README.md file to better understand the implementation through visual representations and explanation.
+
+Presentation Video Link:
+Presentation Slides Link: https://docs.google.com/presentation/d/1JwD6ZSrCvl3qAM70vlp1tFPzyfzNBees4rMeHBCoImU/edit?usp=sharing
 
 ## Project 5 Memory Allocator Extension
 
