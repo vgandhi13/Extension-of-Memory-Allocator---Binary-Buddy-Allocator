@@ -1,5 +1,7 @@
 # Memory Allocator Project
 
+Please look at these presentation slides before looking at the README.md file to better understand the implementation. Presentation Link: https://docs.google.com/presentation/d/1JwD6ZSrCvl3qAM70vlp1tFPzyfzNBees4rMeHBCoImU/edit?usp=sharing
+
 ## Project 5 Memory Allocator Extension
 
 The first thing I did was extend the Project 5 memory allocator by making the heap expandable and modifying `coalesce()` to merge ALL adjacent free blocks regardless of the list structure. The following components were updated to account for this:
