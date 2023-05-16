@@ -1,19 +1,29 @@
-The first thing I did was extend the Project 5 memory allocator by making the heap expandable, and modifying coalesce() to merge ALL adjacent free blocks regardless of the list structure. To account for this I updated the heap function, coalesce function, my_malloc function, and find_free function. All the other functions are untouched. In addition to that I also added a function named findLastNode which finds the last node of the free list. I used sbrk system call instead of the mmap systems call to allocate pages from the OS. The reason is that it provides the process with pages contiguos in memory address on each sbrk call. A detailed explanation and visual represention of this can be found in the slides linked below. Additionally to coallesce the adjacent free nodes, I came with a quadrtic solution which happens to be the most efficient solution. There was an n logn time approach as well, however it had a huge memory overhead. The code for this could be found in my_malloc.h and my_malloc.cpp.
+# Memory Allocator Project
 
-The second thing I worked on was the Binary buddy algorithm. It is a method of memory allocation where available space is repeadtedly split into halves, know as buddies. It keeps splitting
-buddies until it chooses the smallest possible block that can contain the size of memory requested. It allocates and deallocates memory very easily. However, it requires unit of space to be a power of two and also leads to huge internal fragmentation. The code for this can be found in buddy_malloc.h and buddy_malloc.cpp
+## Project 5 Memory Allocator Extension
 
-In my implementation, as a replacement to the node_t struct in the memory allocator project, I use binary_t struct which is used to create a binary tree. Unlike node_t, these nodes of type binary_t of the tree, have their own designated memory. For example, if the size of heap is 4KB, that heap is entirely empty and has no header. It will only have the header header_t when memory is allocated to a particular region. The binary_t type nodes do not act as a header of a free node. The heap available to a program/user is completely empty from top to bottom in the begining with no header. The binary tree just has one node in the begining, which is the head, and the head has a (void *) type member called "offset", which points to the address of the start of this heap. Hence a mmap system call is made each time a node is created in the binary tree. 
+The first thing I did was extend the Project 5 memory allocator by making the heap expandable and modifying `coalesce()` to merge ALL adjacent free blocks regardless of the list structure. The following components were updated to account for this:
 
-I chose to go ahead with this implementation because as mentioned earlier each block of memory that is splitted requires unit of space to be a power of two. However, the use of binary_t header in the heap for free nodes would not ensure that. 
+- `heap` function
+- `coalesce` function
+- `my_malloc` function
+- `find_free` function
 
-More about the binary tree created using binary_t struct:
+All the other functions remain untouched. Additionally, I added a function named `findLastNode` which finds the last node of the free list. Instead of using the `mmap` system call to allocate pages from the OS, I used the `sbrk` system call. The reason for this choice is that `sbrk` provides the process with pages contiguous in memory address on each `sbrk` call. For a detailed explanation and visual representation, please refer to the slides linked below. The code for this extension can be found in `my_malloc.h` and `my_malloc.cpp`.
 
-1. The free nodes in the binary tree will always be a leaf node. But a leaf node won't necessarily be free if it has been allocated.
-2. All the nodes have a member offset which points to an address in the heap available to the user/program.
-3. When a binary tree node is split, two new nodes are created and the left and right pointers of the current node point to it. The left child's offset point the same address as the current node's offset. The offset of right child is current node's offset + half of the actual size of the size allocated to this node. 
-For eg: If size of current node is 1024 and its offset member points to 0x0. If this node is splitted, it's left child will have offset 0x0, and right child will have offset 0x512.
+## Binary Buddy Algorithm
 
-There are two primary function in the implementation: To provide the address of the memory allocated to the user/program, and to free the allocated memory. The interface also consists of other functions which are either used for debugging purposes or as helper functions. Most of the functions are recursive functions and they use Depth First search Algorithm to find the free nodes in the binary tree.
+The second thing I worked on was the Binary Buddy Algorithm. It is a method of memory allocation where available space is repeatedly split into halves, known as buddies. It keeps splitting buddies until it chooses the smallest possible block that can contain the size of memory requested. It allows for easy memory allocation and deallocation, but it requires the unit of space to be a power of two and may result in significant internal fragmentation. The code for this algorithm can be found in `buddy_malloc.h` and `buddy_malloc.cpp`.
 
-To run the code, clone the repo, and run make. Then run the command ./allocator_app. The process to run this code is the exact same as project 5. It will show the results for both my_malloc.cpp and buddy_malloc.cpp. Feel free to email me with any questions you might have with this project. My email is vgandhi@umass.edu
+In my implementation, I replaced the `node_t` struct in the memory allocator project with a `binary_t` struct, which is used to create a binary tree. Unlike `node_t`, the `binary_t` nodes of the tree have their own designated memory. Initially, the heap available to a program/user is completely empty from top to bottom with no header. The binary tree starts with only one node, the head, which has a `void*` type member called "offset" that points to the address of the start of this heap. Therefore, an `mmap` system call is made each time a node is created in the binary tree.
+
+I chose this implementation because, as mentioned earlier, each block of memory that is split requires the unit of space to be a power of two, and using `binary_t` headers in the heap for free nodes would not guarantee this.
+
+### More about the Binary Tree created using `binary_t` struct:
+
+- The free nodes in the binary tree will always be leaf nodes, but a leaf node won't necessarily be free if it has been allocated.
+- All nodes have an `offset` member which points to an address in the heap available to the user/program.
+- When a binary tree node is split, two new nodes are created, and the left and right pointers of the current node point to them.
+  - The left child's `offset` points to the same address as the current node's `offset`.
+  - The offset of the right child is the current node's `offset` + half of the actual size allocated to this node. For example, if the size of the current node is 1024 and its `offset` member points to 0x0, when this node is split, its left child will have an `offset` of 0x0, and the right child will have an `offset` of 0x512.
+- The implementation consists of two primary functions: one to provide the address of the memory allocated to the user/program and another to free the allocated memory. The interface also includes other functions used for debugging purposes or as helper functions. Most
