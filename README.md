@@ -16,7 +16,7 @@ The first thing I did was extend the Project 5 memory allocator by making the he
 
 All the other functions remain untouched. Additionally, I added a function named `findLastNode` which finds the last node of the free list. Instead of using the `mmap` system call to allocate pages from the OS, I used the `sbrk` system call. The reason for this choice is that `sbrk` provides the process with pages contiguous in memory address on each `sbrk` call. For a detailed explanation and visual representation, please refer to the slides linked below. The code for this extension can be found in `my_malloc.h` and `my_malloc.cpp`.
 
-## Binary Buddy Algorithm
+## Binary Buddy Allocator
 
 The second thing I worked on was the Binary Buddy Algorithm. It is a method of memory allocation where available space is repeatedly split into halves, known as buddies. It keeps splitting buddies until it chooses the smallest possible block that can contain the size of memory requested. It allows for easy memory allocation and deallocation, but it requires the unit of space to be a power of two and may result in significant internal fragmentation. The code for this algorithm can be found in `buddy_malloc.h` and `buddy_malloc.cpp`.
 
