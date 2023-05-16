@@ -26,6 +26,30 @@ I chose this implementation because, as mentioned earlier, each block of memory 
 
 The implementation consists of two primary functions: one to provide the address of the memory allocated to the user/program and another to free the allocated memory. The interface also includes other functions used for debugging purposes or as helper functions. Most of the functions are recursive and utilize the Depth First Search algorithm to find free nodes in the binary tree.
 
+## Interface
+
+1. `void *buddy_malloc(size_t size)`: Returns a pointer to a region of memory with at least `size` bytes. This function calls the following functions:
+    - `binary_t *buddy_heap()`: Returns the head pointer to the binary tree. If the heap has not been allocated yet (treeHead is NULL), it uses `mmap` to allocate a page of memory from the OS, which acts as the heap for the code.
+        - `void buddy_createBinaryTreeNode(binary_t **node)`: Allocates memory for the `binary_t` type `treeHead` node of the binary tree. The `offset` field of this `treeHead` will point to the address of the start of the page received from `mmap` in the `buddy_heap` function.
+    - `void buddy_find_free(size_t size, void **found, binary_t **node)`: This recursive function finds a node in the binary tree that has enough available memory to allocate to a calling program.
+        - `void buddy_split(binary_t **node, binary_t **leftChild, binary_t **rightChild)`: Splits a binary tree node into two other binary tree nodes to accommodate an allocation request when the requested size from the calling program is <= the size of the `binary_t` node.
+
+2. `void buddy_my_free(void *allocated)`: Frees a given region of memory back to the heap. It updates the respective binary tree node accordingly.
+    - `void buddy_findTreeNode(size_t size, binary_t *node, void *offset, binary_t **foundNode)`: Recursive depth-first search approach to find the binary tree node whose `offset` field points to the same address as the `offset` parameter.
+    - `void buddy_coalesce(binary_t *foundNode)`: This recursive function merges the empty buddies in the binary tree to reduce external fragmentation.
+
+3. `void buddy_print_free_list()`: Recursive function that prints the free list.
+
+4. `size_t buddy_available_memory()`: Calculates the amount of free memory available in the heap.
+    - `void freeNodeAndAvailableMemoryHelper(binary_t *node)`: Recursive function that updates a global variable.
+
+5. `int buddy_number_of_free_nodes()`: Returns the number of nodes with available memory in the binary tree.
+    - `void freeNodeAndAvailableMemoryHelper(binary_t *node)`: Recursive function that updates a global variable.
+
+6. `void buddy_reset_heap()`: Reallocates the heap.
+
+
+
 ### More about the Binary Tree created using `binary_t` struct:
 
 - The free nodes in the binary tree will always be leaf nodes, but a leaf node won't necessarily be free if it has been allocated.
