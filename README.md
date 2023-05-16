@@ -25,5 +25,5 @@ I chose this implementation because, as mentioned earlier, each block of memory 
 - All nodes have an `offset` member which points to an address in the heap available to the user/program.
 - When a binary tree node is split, two new nodes are created, and the left and right pointers of the current node point to them.
   - The left child's `offset` points to the same address as the current node's `offset`.
-  - The offset of the right child is the current node's `offset` + half of the actual size allocated to this node. For example, if the size of the current node is 1024 and its `offset` member points to 0x0, when this node is split, its left child will have an `offset` of 0x0, and the right child will have an `offset` of 0x512.
+  - The offset of the right child is the current node's `offset` + half of the actual size allocated to this node. For example, if the size of the current node is 1024 and its `offset` member points to 0x0, when this node is split, its left child will have `offset` point to 0x0, and the right child will have an `offset` point to 0x512.
 - The implementation consists of two primary functions: one to provide the address of the memory allocated to the user/program and another to free the allocated memory. The interface also includes other functions used for debugging purposes or as helper functions. Most
