@@ -62,7 +62,7 @@ The implementation consists of two primary functions: one to provide the address
 
 To run the code, follow these steps:
 
-1. Clone the repository.
+1. Clone the repository or download the zip file.
 2. Build the code by running `make`.
 3. Execute the command `./allocator_app`.
 4. The results for both `my_malloc.cpp` and `buddy_malloc.cpp` will be displayed.
