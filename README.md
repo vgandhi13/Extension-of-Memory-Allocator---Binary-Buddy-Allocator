@@ -26,7 +26,7 @@ I chose this implementation because, as mentioned earlier, each block of memory 
 
 The implementation consists of two primary functions: one to provide the address of the memory allocated to the user/program and another to free the allocated memory. The interface also includes other functions used for debugging purposes or as helper functions. Most of the functions are recursive and utilize the Depth First Search algorithm to find free nodes in the binary tree.
 
-## Interface
+### Interface
 
 1. `void *buddy_malloc(size_t size)`: Returns a pointer to a region of memory with at least `size` bytes. This function calls the following functions:
     - `binary_t *buddy_heap()`: Returns the head pointer to the binary tree. If the heap has not been allocated yet (treeHead is NULL), it uses `mmap` to allocate a page of memory from the OS, which acts as the heap for the code.
