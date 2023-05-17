@@ -80,13 +80,13 @@ cout << "\033[0m";
   cout<< "" <<endl;
   cout<<"---------------------------------Allocating Memory--------------------------------"<<endl;
   cout<<""<<endl;
-  cout <<"490 bytes of memory allocated iteratively 5 times. Look at the heap at each iteration."<<endl;
+  cout <<"490 bytes of memory allocated iteratively 6 times. Look at the heap at each iteration."<<endl;
   void *allocated2[10];
   cout<<" "<<endl;
   buddy_print_free_list();
   cout <<"Available memory before: "<< buddy_available_memory() <<endl;
   cout<<" "<<endl;
-  for (int i = 0; i < 5; i++) {
+  for (int i = 0; i < 6; i++) {
     cout<<i+1<<"."<<endl;
     allocated2[i] = buddy_malloc(490);
     buddy_print_free_list();
@@ -100,7 +100,7 @@ cout << "\033[0m";
   // printf("Available memory before: %zd.\n", available_memory());
   
 
-  for (int i = 0; i < 5; i++) {
+  for (int i = 0; i < 6; i++) {
     cout<<i+1<<"."<<endl;
     cout<<"Before freeing: "<<endl;
     buddy_print_free_list();
