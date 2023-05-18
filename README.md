@@ -1,6 +1,6 @@
 # Memory Allocator Project
 
-Kindly watch the recording of the presentation before looking at the README.md file to better understand the implementation through visual representations and explanation.
+Kindly go through the presentation slides and watch the recording of the presentation before looking at the README.md file to better understand the implementation through visual representations and explanation.
 
 **Presentation Video Links:**
 
