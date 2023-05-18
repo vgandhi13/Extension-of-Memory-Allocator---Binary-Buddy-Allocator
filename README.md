@@ -4,8 +4,8 @@ Kindly go through the presentation slides and watch the recording of the present
 
 **Presentation Video Links:**
 
-- [Part 1](https://drive.google.com/file/d/1t0DcIESlLGc4VJPullohJJlVjLg10eCY/view?usp=sharing)
-- [Part 2](https://drive.google.com/file/d/1RVVzp1fmkt_CeP4f1V09Ky14Lx2GJOCT/view?usp=sharing)
+- [Part 1 - Extension of Project 5](https://drive.google.com/file/d/1t0DcIESlLGc4VJPullohJJlVjLg10eCY/view?usp=sharing)
+- [Part 2 - Binary Buddy Allocator](https://drive.google.com/file/d/1RVVzp1fmkt_CeP4f1V09Ky14Lx2GJOCT/view?usp=sharing)
 
 **Presentation Slides Link:** [Slides](https://docs.google.com/presentation/d/1JwD6ZSrCvl3qAM70vlp1tFPzyfzNBees4rMeHBCoImU/edit?usp=sharing)
 
