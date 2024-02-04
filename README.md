@@ -10,7 +10,7 @@ Kindly go through the presentation slides and watch the recording of the present
 **Presentation Slides Link:** [Slides](https://docs.google.com/presentation/d/1JwD6ZSrCvl3qAM70vlp1tFPzyfzNBees4rMeHBCoImU/edit?usp=sharing)
 
 
-## 1. Project 5 Memory Allocator Extension
+## 1. Extendable Heap Implementation
 
 The first thing I did was extend the Project 5 memory allocator by making the heap expandable and modifying `coalesce()` to merge ALL adjacent free blocks regardless of the list structure. The following components were updated to account for this:
 
